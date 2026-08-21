@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pine Grove Community Snack Sign-Up</title>
+
+  <style>
+    :root {
+      --green: #315b47;
+      --dark-green: #244537;
+      --light-green: #e9f0eb;
+      --very-light-green: #f4f7f5;
+      --cream: #faf9f5;
+      --text: #28332d;
+      --muted: #65736b;
+      --border: #d8e1db;
+      --white: #ffffff;
+      --shadow: 0 4px 14px rgba(36, 69, 55, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .site-header {
+      background: var(--green);
+      color: white;
+      padding: 24px 20px;
+    }
+
+    .header-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .logo {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      margin: 0 0 5px;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .header-text p {
+      margin: 0;
+      font-size: 17px;
+      opacity: 0.92;
+    }
+
+    /* ---------- MAIN ---------- */
+
+    main {
+      max-width: 1050px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+    }
+
+    .intro-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+
+    .heart {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .intro-card p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .intro-card strong {
+      color: var(--dark-green);
+    }
+
+    /* ---------- CLASSROOM SELECTION ---------- */
+
+    .section-title {
+      font-size: 24px;
+      margin: 0 0 7px;
+      color: var(--dark-green);
+    }
+
+    .section-description {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .classroom-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 34px;
+    }
+
+    .classroom-button {
+      appearance: none;
+      border: 2px solid var(--green);
+      background: white;
+      color: var(--green);
+      border-radius: 12px;
+      padding: 15px 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .classroom-button:hover {
+      background: var(--light-green);
+    }
+
+    .classroom-button.active {
+      background: var(--green);
+      color: white;
+    }
+
+    /* ---------- LOADING / MESSAGES ---------- */
+
+    #loading {
+      text-align: center;
+      padding: 35px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .message-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* ---------- MONTH ---------- */
+
+    .month-section {
+      margin-bottom: 36px;
+    }
+
+    .month-heading {
+      font-size: 22px;
+      color: var(--dark-green);
+      margin: 0 0 15px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--light-green);
+    }
+
+    /* ---------- SLOT CARDS ---------- */
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .slot-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slot-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .slot-date {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--dark-green);
+    }
+
+    .type-badge {
+      background: var(--light-green);
+      color: var(--dark-green);
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .items-label {
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .items-needed {
+      white-space: pre-line;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .signup-button {
+      width: 100%;
+      border: none;
+      background: var(--green);
+      color: white;
+      border-radius: 9px;
+      padding: 12px 15px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .signup-button:hover {
+      background: var(--dark-green);
+    }
+
+    /* ---------- MODAL ---------- */
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 35, 27, 0.58);
+      z-index: 1000;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 16px;
+      padding: 27px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+    }
+
+    .close-button {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      color: var(--dark-green);
+      margin: 0 35px 15px 0;
+      font-size: 24px;
+    }
+
+    .selection-summary {
+      background: var(--very-light-green);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .selection-summary p {
+      margin: 3px 0;
+    }
+
+    .selection-summary .selected-date {
+      font-weight: bold;
+      font-size: 17px;
+      color: var(--dark-green);
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 15px 0 6px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid #bdcac2;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: 2px solid var(--light-green);
+      border-color: var(--green);
+    }
+
+    .submit-button {
+      width: 100%;
+      margin-top: 21px;
+      border: none;
+      background: var(--green);
+      color: white;
+      border-radius: 9px;
+      padding: 13px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: var(--dark-green);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .form-error {
+      display: none;
+      margin-top: 14px;
+      background: #fff1f0;
+      border: 1px solid #efc5c1;
+      color: #8a3028;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    /* ---------- SUCCESS ---------- */
+
+    .success-content {
+      display: none;
+      text-align: center;
+      padding: 10px 4px;
+    }
+
+    .success-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .success-content h2 {
+      margin-right: 0;
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+      text-align: center;
+      padding: 25px 20px 35px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 750px) {
+      .header-inner {
+        align-items: center;
+      }
+
+      .logo {
+        width: 72px;
+        height: 72px;
+      }
+
+      .header-text h1 {
+        font-size: 27px;
+      }
+
+      .header-text p {
+        font-size: 15px;
+      }
+
+      .classroom-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .slots-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header {
+        padding: 18px 15px;
+      }
+
+      .header-inner {
+        gap: 14px;
+      }
+
+      .logo {
+        width: 62px;
+        height: 62px;
+      }
+
+      .header-text h1 {
+        font-size: 23px;
+      }
+
+      main {
+        padding: 0 14px;
+      }
+
+      .intro-card {
+        padding: 18px;
+      }
+
+      .classroom-button {
+        font-size: 15px;
+      }
+
+      .modal {
+        padding: 23px 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <!-- Upload your Pine Grove logo to GitHub as logo.png -->
+      <img
+        src="logo.png"
+        alt="Pine Grove Montessori School"
+        class="logo"
+      >
+
+      <div class="header-text">
+        <h1>Community Snack Sign-Up</h1>
+        <p>Pine Grove Montessori School</p>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <div class="intro-card">
+      <div class="heart">♥</div>
+
+      <p>
+        Families are invited to help provide classroom snack and
+        materials throughout the school year. Choose your child's
+        classroom below to see the currently available dates.
+        <strong>You'll receive an email reminder two days before
+        your selected date.</strong>
+      </p>
+    </div>
+
+
+    <section>
+
+      <h2 class="section-title">Choose Your Classroom</h2>
+
+      <p class="section-description">
+        Select your child's classroom to view available sign-up opportunities.
+      </p>
+
+      <div class="classroom-buttons">
+
+        <button
+          class="classroom-button"
+          data-classroom="Maple"
+          onclick="selectClassroom('Maple', this)"
+        >
+          Maple
+        </button>
+
+        <button
+          class="classroom-button"
+          data-classroom="Birch"
+          onclick="selectClassroom('Birch', this)"
+        >
+          Birch
+        </button>
+
+        <button
+          class="classroom-button"
+          data-classroom="Spruce"
+          onclick="selectClassroom('Spruce', this)"
+        >
+          Spruce
+        </button>
+
+        <button
+          class="classroom-button"
+          data-classroom="Seedlings"
+          onclick="selectClassroom('Seedlings', this)"
+        >
+          Seedlings
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <section id="opportunitiesSection">
+
+      <h2 class="section-title" id="opportunitiesTitle">
+        Available Sign-Ups
+      </h2>
+
+      <div id="loading">
+        Loading available dates...
+      </div>
+
+      <div id="slotsContainer"></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- SIGN-UP POPUP -->
+
+  <div
+    class="modal-overlay"
+    id="modalOverlay"
+    onclick="overlayClick(event)"
+  >
+
+    <div class="modal">
+
+      <button
+        class="close-button"
+        onclick="closeModal()"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+
+      <div id="formContent">
+
+        <h2>Sign Up</h2>
+
+        <div class="selection-summary">
+
+          <p
+            class="selected-date"
+            id="modalDate"
+          ></p>
+
+          <p id="modalClassroom"></p>
+          <p id="modalType"></p>
+
+          <p style="margin-top:10px;">
+            <strong>Please bring:</strong>
+          </p>
+
+          <p
+            id="modalItems"
+            style="white-space:pre-line;"
+          ></p>
+
+        </div>
+
+
+        <form
+          id="signupForm"
+          onsubmit="submitSignup(event)"
+        >
+
+          <label for="childName">
+            Child's Name
+          </label>
+
+          <input
+            type="text"
+            id="childName"
+            autocomplete="name"
+            required
+          >
+
+
+          <label for="caregiverEmail">
+            Caregiver Email
+          </label>
+
+          <input
+            type="email"
+            id="caregiverEmail"
+            autocomplete="email"
+            required
+          >
+
+
+          <button
+            type="submit"
+            class="submit-button"
+            id="submitButton"
+          >
+            Sign Me Up
+          </button>
+
+
+          <div
+            class="form-error"
+            id="formError"
+          ></div>
+
+        </form>
+
+      </div>
+
+
+      <div
+        class="success-content"
+        id="successContent"
+      >
+
+        <div class="success-icon">♥</div>
+
+        <h2>You're signed up!</h2>
+
+        <p id="successText">
+          Thank you for helping support your child's classroom.
+        </p>
+
+        <p>
+          We'll send a reminder to the email you provided
+          two days before your sign-up date.
+        </p>
+
+        <button
+          class="submit-button"
+          onclick="finishSignup()"
+        >
+          Done
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    Pine Grove Montessori School
+  </footer>
+
+
+<script>
+
+  /*
+   * Pine Grove Apps Script Web App
+   */
+
+  const WEB_APP_URL =
+    'https://script.google.com/macros/s/AKfycbyU2YWxl25UnMHHZ0VN3_nd-Yip8ztHBxuN-RAfLKhSuHd5tEzkNhW9BJ4YXATIOA7e/exec';
+
+
+  let allSlots = [];
+  let selectedClassroom = '';
+  let selectedSlot = null;
+
+
+  /* -----------------------------------
+     LOAD AVAILABLE SLOTS
+  ----------------------------------- */
+
+  async function loadSlots() {
+
+    const loading =
+      document.getElementById('loading');
+
+    const container =
+      document.getElementById('slotsContainer');
+
+    loading.style.display = 'block';
+    container.innerHTML = '';
+
+    try {
+
+      const response =
+        await fetch(WEB_APP_URL);
+
+      if (!response.ok) {
+        throw new Error(
+          'Could not connect to the sign-up sheet.'
+        );
+      }
+
+      const data =
+        await response.json();
+
+      if (!data.success) {
+        throw new Error(
+          data.message ||
+          'Unable to load sign-ups.'
+        );
+      }
+
+      allSlots =
+        Array.isArray(data.slots)
+          ? data.slots
+          : [];
+
+      loading.style.display = 'none';
+
+      if (selectedClassroom) {
+        renderSlots();
+      } else {
+        container.innerHTML =
+          `<div class="message-box">
+            Choose a classroom above to see available dates.
+          </div>`;
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      loading.style.display = 'none';
+
+      container.innerHTML =
+        `<div class="message-box">
+          We're having trouble loading the sign-up calendar.
+          Please refresh the page and try again.
+        </div>`;
+    }
+  }
+
+
+  /* -----------------------------------
+     CLASSROOM FILTER
+  ----------------------------------- */
+
+  function selectClassroom(
+    classroom,
+    button
+  ) {
+
+    selectedClassroom = classroom;
+
+    document
+      .querySelectorAll('.classroom-button')
+      .forEach(btn =>
+        btn.classList.remove('active')
+      );
+
+    button.classList.add('active');
+
+    document.getElementById(
+      'opportunitiesTitle'
+    ).textContent =
+      `${classroom} Classroom Sign-Ups`;
+
+    renderSlots();
+
+    document.getElementById(
+      'opportunitiesSection'
+    ).scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+
+
+  /* -----------------------------------
+     SHOW AVAILABLE SLOTS
+  ----------------------------------- */
+
+  function renderSlots() {
+
+    const container =
+      document.getElementById(
+        'slotsContainer'
+      );
+
+    const filtered =
+      allSlots
+        .filter(slot =>
+          normalizeClassroom(
+            slot.classroom
+          ) === selectedClassroom
+        )
+        .sort((a, b) =>
+          a.date.localeCompare(b.date)
+        );
+
+    if (filtered.length === 0) {
+
+      container.innerHTML =
+        `<div class="message-box">
+          There aren't currently any available
+          sign-ups for the ${escapeHtml(selectedClassroom)}
+          Classroom.
+        </div>`;
+
+      return;
+    }
+
+
+    const grouped = {};
+
+    filtered.forEach(slot => {
+
+      const monthKey =
+        getMonthKey(slot.date);
+
+      if (!grouped[monthKey]) {
+        grouped[monthKey] = [];
+      }
+
+      grouped[monthKey].push(slot);
+    });
+
+
+    container.innerHTML =
+      Object.keys(grouped)
+        .map(monthKey => {
+
+          const slots =
+            grouped[monthKey];
+
+          const monthName =
+            getMonthHeading(
+              slots[0].date
+            );
+
+          return `
+            <div class="month-section">
+
+              <h3 class="month-heading">
+                ${escapeHtml(monthName)}
+              </h3>
+
+              <div class="slots-grid">
+
+                ${slots
+                  .map(slot =>
+                    slotCardHtml(slot)
+                  )
+                  .join('')}
+
+              </div>
+
+            </div>
+          `;
+        })
+        .join('');
+  }
+
+
+  function slotCardHtml(slot) {
+
+    const slotIndex =
+      allSlots.indexOf(slot);
+
+    return `
+      <article class="slot-card">
+
+        <div class="slot-top">
+
+          <div class="slot-date">
+            ${escapeHtml(slot.displayDate)}
+          </div>
+
+          <div class="type-badge">
+            ${escapeHtml(slot.type)}
+          </div>
+
+        </div>
+
+        <div class="items-label">
+          Please Bring
+        </div>
+
+        <div class="items-needed">
+          ${escapeHtml(slot.itemsNeeded)}
+        </div>
+
+        <button
+          class="signup-button"
+          onclick="openSignup(${slotIndex})"
+        >
+          Sign Up
+        </button>
+
+      </article>
+    `;
+  }
+
+
+  /* -----------------------------------
+     SIGN-UP POPUP
+  ----------------------------------- */
+
+  function openSignup(index) {
+
+    selectedSlot =
+      allSlots[index];
+
+    document.getElementById(
+      'modalDate'
+    ).textContent =
+      selectedSlot.displayDate;
+
+
+    document.getElementById(
+      'modalClassroom'
+    ).textContent =
+      `${normalizeClassroom(
+        selectedSlot.classroom
+      )} Classroom`;
+
+
+    document.getElementById(
+      'modalType'
+    ).textContent =
+      selectedSlot.type;
+
+
+    document.getElementById(
+      'modalItems'
+    ).textContent =
+      selectedSlot.itemsNeeded;
+
+
+    document.getElementById(
+      'childName'
+    ).value = '';
+
+
+    document.getElementById(
+      'caregiverEmail'
+    ).value = '';
+
+
+    document.getElementById(
+      'formError'
+    ).style.display =
+      'none';
+
+
+    document.getElementById(
+      'formContent'
+    ).style.display =
+      'block';
+
+
+    document.getElementById(
+      'successContent'
+    ).style.display =
+      'none';
+
+
+    document.getElementById(
+      'modalOverlay'
+    ).classList.add('show');
+  }
+
+
+  function closeModal() {
+
+    document.getElementById(
+      'modalOverlay'
+    ).classList.remove('show');
+
+    selectedSlot = null;
+  }
+
+
+  function overlayClick(event) {
+
+    if (
+      event.target.id ===
+      'modalOverlay'
+    ) {
+      closeModal();
+    }
+  }
+
+
+  /* -----------------------------------
+     SUBMIT SIGN-UP
+  ----------------------------------- */
+
+  async function submitSignup(event) {
+
+    event.preventDefault();
+
+    if (!selectedSlot) {
+      return;
+    }
+
+
+    const childName =
+      document.getElementById(
+        'childName'
+      ).value.trim();
+
+
+    const email =
+      document.getElementById(
+        'caregiverEmail'
+      ).value.trim();
+
+
+    const button =
+      document.getElementById(
+        'submitButton'
+      );
+
+
+    const errorBox =
+      document.getElementById(
+        'formError'
+      );
+
+
+    errorBox.style.display =
+      'none';
+
+
+    button.disabled = true;
+
+    button.textContent =
+      'Saving...';
+
+
+    const payload = {
+      action: 'claim',
+      date: selectedSlot.date,
+      classroom:
+        selectedSlot.classroom,
+      type:
+        selectedSlot.type,
+      childName: childName,
+      email: email
+    };
+
+
+    try {
+
+      /*
+       * text/plain prevents the browser from
+       * sending an unnecessary CORS preflight
+       * request to Google Apps Script.
+       */
+
+      const response =
+        await fetch(
+          WEB_APP_URL,
+          {
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'text/plain;charset=utf-8'
+            },
+
+            body:
+              JSON.stringify(payload)
+          }
+        );
+
+
+      const result =
+        await response.json();
+
+
+      if (!result.success) {
+
+        throw new Error(
+          result.message ||
+          'We could not save your sign-up.'
+        );
+      }
+
+
+      document.getElementById(
+        'formContent'
+      ).style.display =
+        'none';
+
+
+      document.getElementById(
+        'successContent'
+      ).style.display =
+        'block';
+
+
+      document.getElementById(
+        'successText'
+      ).textContent =
+        `Thank you! ${childName} is signed up for ${selectedSlot.type} on ${selectedSlot.displayDate}.`;
+
+
+      await loadSlots();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      errorBox.textContent =
+        error.message ||
+        'Something went wrong. Please try again.';
+
+      errorBox.style.display =
+        'block';
+
+    } finally {
+
+      button.disabled = false;
+
+      button.textContent =
+        'Sign Me Up';
+    }
+  }
+
+
+  function finishSignup() {
+    closeModal();
+  }
+
+
+  /* -----------------------------------
+     HELPERS
+  ----------------------------------- */
+
+  function normalizeClassroom(value) {
+
+    return String(value || '')
+      .replace(/\s*Classroom\s*$/i, '')
+      .trim();
+  }
+
+
+  function getMonthKey(dateString) {
+
+    const parts =
+      dateString.split('-');
+
+    return `${parts[0]}-${parts[1]}`;
+  }
+
+
+  function getMonthHeading(dateString) {
+
+    const parts =
+      dateString.split('-');
+
+    const year =
+      Number(parts[0]);
+
+    const month =
+      Number(parts[1]);
+
+    const date =
+      new Date(
+        year,
+        month - 1,
+        1
+      );
+
+    return date.toLocaleDateString(
+      'en-US',
+      {
+        month: 'long',
+        year: 'numeric'
+      }
+    );
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value || '')
+      .replace(
+        /[&<>"']/g,
+        character => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        })[character]
+      );
+  }
+
+
+  /* Load sign-ups when page opens */
+
+  loadSlots();
+
+</script>
+
+</body>
+</html>
