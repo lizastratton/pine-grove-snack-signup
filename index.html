@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Pine Grove Community Snack Sign-Up</title>
 
@@ -10,14 +14,18 @@
     :root {
       --green: #315b47;
       --dark-green: #244537;
-      --light-green: #e9f0eb;
-      --very-light-green: #f4f7f5;
+      --soft-green: #e7efe9;
+      --lighter-green: #f3f7f4;
       --cream: #faf9f5;
-      --text: #28332d;
-      --muted: #65736b;
-      --border: #d8e1db;
       --white: #ffffff;
+      --text: #29352f;
+      --muted: #68756e;
+      --border: #d8e1db;
       --shadow: 0 4px 14px rgba(36, 69, 55, 0.08);
+
+      --snack: #e7efe9;
+      --food-prep: #f2eadc;
+      --flowers: #f3e7ed;
     }
 
     * {
@@ -29,10 +37,13 @@
       font-family: Arial, Helvetica, sans-serif;
       background: var(--cream);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
-    /* ---------- HEADER ---------- */
+
+    /* =========================
+       HEADER
+    ========================= */
 
     .site-header {
       background: var(--green);
@@ -41,16 +52,16 @@
     }
 
     .header-inner {
-      max-width: 1050px;
+      width: min(1300px, 100%);
       margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 20px;
     }
 
     .logo {
-      width: 92px;
-      height: 92px;
+      width: 88px;
+      height: 88px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -58,19 +69,22 @@
     .header-text h1 {
       margin: 0 0 5px;
       font-size: 34px;
-      line-height: 1.1;
+      line-height: 1.08;
     }
 
     .header-text p {
       margin: 0;
-      font-size: 17px;
+      font-size: 16px;
       opacity: 0.92;
     }
 
-    /* ---------- MAIN ---------- */
+
+    /* =========================
+       MAIN
+    ========================= */
 
     main {
-      max-width: 1050px;
+      width: min(1300px, 100%);
       margin: 28px auto 60px;
       padding: 0 20px;
     }
@@ -79,63 +93,65 @@
       background: white;
       border: 1px solid var(--border);
       border-radius: 15px;
-      padding: 22px 24px;
-      display: flex;
-      gap: 15px;
-      align-items: flex-start;
+      padding: 21px 23px;
       box-shadow: var(--shadow);
-      margin-bottom: 32px;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 28px;
     }
 
-    .heart {
-      font-size: 28px;
-      line-height: 1;
+    .intro-heart {
+      font-size: 26px;
+      color: var(--green);
     }
 
     .intro-card p {
       margin: 0;
-      font-size: 16px;
     }
 
     .intro-card strong {
       color: var(--dark-green);
     }
 
-    /* ---------- CLASSROOM SELECTION ---------- */
 
-    .section-title {
-      font-size: 24px;
-      margin: 0 0 7px;
+    /* =========================
+       FILTERS
+    ========================= */
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      margin-bottom: 26px;
+    }
+
+    .filter-area h2 {
+      margin: 0 0 10px;
+      font-size: 19px;
       color: var(--dark-green);
     }
 
-    .section-description {
-      margin: 0 0 18px;
-      color: var(--muted);
-    }
-
     .classroom-buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .classroom-button {
-      appearance: none;
-      border: 2px solid var(--green);
+      border: 1.5px solid var(--green);
       background: white;
       color: var(--green);
-      border-radius: 12px;
-      padding: 15px 12px;
-      font-size: 17px;
+      border-radius: 999px;
+      padding: 9px 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.15s ease;
+      font-size: 14px;
     }
 
     .classroom-button:hover {
-      background: var(--light-green);
+      background: var(--soft-green);
     }
 
     .classroom-button.active {
@@ -143,120 +159,254 @@
       color: white;
     }
 
-    /* ---------- LOADING / MESSAGES ---------- */
 
-    #loading {
-      text-align: center;
-      padding: 35px;
-      color: var(--muted);
-      font-size: 17px;
+    /* =========================
+       MONTH NAVIGATION
+    ========================= */
+
+    .month-navigation {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .message-box {
-      background: white;
+    .month-navigation button {
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+      background: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 21px;
+      cursor: pointer;
+      color: var(--green);
+    }
+
+    .month-navigation button:hover {
+      background: var(--soft-green);
+    }
+
+    .month-title {
+      min-width: 180px;
       text-align: center;
-      color: var(--muted);
-    }
-
-    /* ---------- MONTH ---------- */
-
-    .month-section {
-      margin-bottom: 36px;
-    }
-
-    .month-heading {
       font-size: 22px;
+      font-weight: bold;
       color: var(--dark-green);
-      margin: 0 0 15px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--light-green);
     }
 
-    /* ---------- SLOT CARDS ---------- */
 
-    .slots-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
+    /* =========================
+       LEGEND
+    ========================= */
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .slot-card {
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.snack {
+      background: #a9c8b3;
+    }
+
+    .legend-dot.food {
+      background: #d8bd8c;
+    }
+
+    .legend-dot.flowers {
+      background: #d5a8bb;
+    }
+
+
+    /* =========================
+       CALENDAR
+    ========================= */
+
+    .calendar-wrap {
+      overflow-x: auto;
+    }
+
+    .calendar {
+      min-width: 980px;
       background: white;
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 20px;
+      overflow: hidden;
       box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
     }
 
-    .slot-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
-      margin-bottom: 12px;
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: var(--green);
+      color: white;
     }
 
-    .slot-date {
-      font-size: 18px;
+    .weekday {
+      text-align: center;
+      padding: 11px 6px;
+      font-size: 13px;
       font-weight: bold;
-      color: var(--dark-green);
-    }
-
-    .type-badge {
-      background: var(--light-green);
-      color: var(--dark-green);
-      padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .items-label {
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      font-size: 11px;
-      color: var(--muted);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day {
+      min-height: 170px;
+      padding: 9px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .calendar-day:nth-child(7n) {
+      border-right: none;
+    }
+
+    .calendar-day.other-month {
+      background: #f7f7f4;
+    }
+
+    .calendar-day.no-school-day {
+      background: #fafafa;
+    }
+
+    .day-number {
+      font-size: 14px;
       font-weight: bold;
-      margin-bottom: 4px;
+      color: var(--dark-green);
+      margin-bottom: 7px;
     }
 
-    .items-needed {
+    .other-month .day-number {
+      color: #a8afa9;
+    }
+
+
+    /* =========================
+       OPPORTUNITIES INSIDE DAYS
+    ========================= */
+
+    .day-slots {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .slot {
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+      border-left: 4px solid var(--green);
+    }
+
+    .slot.snack {
+      background: var(--snack);
+    }
+
+    .slot.food-prep {
+      background: var(--food-prep);
+      border-left-color: #b89251;
+    }
+
+    .slot.flower-arranging {
+      background: var(--flowers);
+      border-left-color: #ac758d;
+    }
+
+    .slot-classroom {
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--muted);
+    }
+
+    .slot-type {
+      font-weight: bold;
+      color: var(--dark-green);
+      margin: 1px 0 4px;
+    }
+
+    .slot-items {
       white-space: pre-line;
-      margin-bottom: 18px;
-      flex-grow: 1;
+      margin-bottom: 6px;
     }
 
-    .signup-button {
-      width: 100%;
+    .slot-person {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 5px;
+      font-weight: bold;
+    }
+
+    .available-label {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .slot button {
       border: none;
       background: var(--green);
       color: white;
-      border-radius: 9px;
-      padding: 12px 15px;
-      font-size: 15px;
+      border-radius: 6px;
+      padding: 6px 9px;
+      font-size: 11px;
       font-weight: bold;
       cursor: pointer;
+      width: 100%;
+      margin-top: 5px;
     }
 
-    .signup-button:hover {
+    .slot button:hover {
       background: var(--dark-green);
     }
 
-    /* ---------- MODAL ---------- */
+
+    /* =========================
+       MESSAGES
+    ========================= */
+
+    .loading,
+    .error-message {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       MODAL
+    ========================= */
 
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(20, 35, 27, 0.58);
-      z-index: 1000;
       padding: 20px;
+      z-index: 1000;
       align-items: center;
       justify-content: center;
     }
@@ -266,12 +416,12 @@
     }
 
     .modal {
-      background: white;
+      position: relative;
       width: 100%;
       max-width: 520px;
+      background: white;
       border-radius: 16px;
       padding: 27px;
-      position: relative;
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: 0 15px 45px rgba(0,0,0,0.2);
@@ -281,31 +431,30 @@
       position: absolute;
       right: 15px;
       top: 12px;
-      background: none;
       border: none;
-      font-size: 28px;
-      color: var(--muted);
+      background: none;
+      font-size: 29px;
       cursor: pointer;
+      color: var(--muted);
     }
 
     .modal h2 {
       color: var(--dark-green);
-      margin: 0 35px 15px 0;
-      font-size: 24px;
+      margin: 0 35px 16px 0;
     }
 
     .selection-summary {
-      background: var(--very-light-green);
-      border-radius: 10px;
+      background: var(--lighter-green);
       padding: 15px;
+      border-radius: 10px;
       margin-bottom: 20px;
     }
 
     .selection-summary p {
-      margin: 3px 0;
+      margin: 4px 0;
     }
 
-    .selection-summary .selected-date {
+    .selected-date {
       font-weight: bold;
       font-size: 17px;
       color: var(--dark-green);
@@ -320,917 +469,1168 @@
 
     input {
       width: 100%;
+      padding: 12px;
       border: 1px solid #bdcac2;
       border-radius: 8px;
-      padding: 12px;
       font-size: 16px;
-    }
-
-    input:focus {
-      outline: 2px solid var(--light-green);
-      border-color: var(--green);
     }
 
     .submit-button {
       width: 100%;
-      margin-top: 21px;
+      margin-top: 20px;
+      padding: 13px;
       border: none;
       background: var(--green);
       color: white;
-      border-radius: 9px;
-      padding: 13px;
-      font-size: 16px;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-    }
-
-    .submit-button:hover {
-      background: var(--dark-green);
     }
 
     .submit-button:disabled {
       opacity: 0.6;
-      cursor: wait;
     }
 
     .form-error {
       display: none;
-      margin-top: 14px;
+      margin-top: 13px;
       background: #fff1f0;
-      border: 1px solid #efc5c1;
       color: #8a3028;
-      border-radius: 8px;
+      border: 1px solid #efc5c1;
       padding: 10px;
+      border-radius: 8px;
       font-size: 14px;
     }
-
-    /* ---------- SUCCESS ---------- */
 
     .success-content {
       display: none;
       text-align: center;
-      padding: 10px 4px;
     }
 
-    .success-icon {
-      font-size: 45px;
-      margin-bottom: 10px;
+    .success-heart {
+      font-size: 42px;
+      color: var(--green);
     }
 
-    .success-content h2 {
-      margin-right: 0;
-    }
 
-    /* ---------- FOOTER ---------- */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       text-align: center;
-      padding: 25px 20px 35px;
       color: var(--muted);
+      padding: 20px 20px 35px;
       font-size: 13px;
     }
 
-    /* ---------- MOBILE ---------- */
 
-    @media (max-width: 750px) {
-      .header-inner {
-        align-items: center;
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+      .header-text h1 {
+        font-size: 26px;
       }
 
       .logo {
-        width: 72px;
-        height: 72px;
+        width: 70px;
+        height: 70px;
       }
 
-      .header-text h1 {
-        font-size: 27px;
+      .controls {
+        align-items: flex-start;
       }
 
-      .header-text p {
-        font-size: 15px;
-      }
-
-      .classroom-buttons {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .slots-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .site-header {
-        padding: 18px 15px;
-      }
-
-      .header-inner {
-        gap: 14px;
-      }
-
-      .logo {
-        width: 62px;
-        height: 62px;
-      }
-
-      .header-text h1 {
-        font-size: 23px;
-      }
-
-      main {
-        padding: 0 14px;
+      .month-navigation {
+        width: 100%;
+        justify-content: center;
       }
 
       .intro-card {
-        padding: 18px;
-      }
-
-      .classroom-button {
-        font-size: 15px;
-      }
-
-      .modal {
-        padding: 23px 19px;
+        font-size: 14px;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
+<header class="site-header">
+  <div class="header-inner">
 
-      <!-- Upload your Pine Grove logo to GitHub as logo.png -->
-      <img
-        src="logo.png"
-        alt="Pine Grove Montessori School"
-        class="logo"
-      >
+    <img
+      src="logo.png"
+      alt="Pine Grove Montessori School"
+      class="logo"
+    >
 
-      <div class="header-text">
-        <h1>Community Snack Sign-Up</h1>
-        <p>Pine Grove Montessori School</p>
-      </div>
-
-    </div>
-  </header>
-
-
-  <main>
-
-    <div class="intro-card">
-      <div class="heart">♥</div>
-
-      <p>
-        Families are invited to help provide classroom snack and
-        materials throughout the school year. Choose your child's
-        classroom below to see the currently available dates.
-        <strong>You'll receive an email reminder two days before
-        your selected date.</strong>
-      </p>
+    <div class="header-text">
+      <h1>Community Snack Calendar</h1>
+      <p>Pine Grove Montessori School</p>
     </div>
 
+  </div>
+</header>
 
-    <section>
 
-      <h2 class="section-title">Choose Your Classroom</h2>
+<main>
 
-      <p class="section-description">
-        Select your child's classroom to view available sign-up opportunities.
-      </p>
+  <div class="intro-card">
+    <div class="intro-heart">♥</div>
+
+    <p>
+      Use the calendar below to see upcoming classroom
+      <strong>Snack, Food Prep, and Flower Arranging</strong>
+      needs. Available opportunities can be claimed directly
+      from the calendar. Once a family signs up, their child's
+      first name and last initial will remain visible so families
+      and teachers can easily see what has already been covered.
+      A confirmation email is sent immediately, followed by a
+      reminder on the Friday before the scheduled date.
+    </p>
+  </div>
+
+
+  <div class="controls">
+
+    <div class="filter-area">
+
+      <h2>View Classroom</h2>
 
       <div class="classroom-buttons">
 
         <button
+          class="classroom-button active"
+          onclick="setClassroom('All', this)"
+        >
+          All
+        </button>
+
+        <button
           class="classroom-button"
-          data-classroom="Maple"
-          onclick="selectClassroom('Maple', this)"
+          onclick="setClassroom('Maple', this)"
         >
           Maple
         </button>
 
         <button
           class="classroom-button"
-          data-classroom="Birch"
-          onclick="selectClassroom('Birch', this)"
+          onclick="setClassroom('Birch', this)"
         >
           Birch
         </button>
 
         <button
           class="classroom-button"
-          data-classroom="Spruce"
-          onclick="selectClassroom('Spruce', this)"
+          onclick="setClassroom('Spruce', this)"
         >
           Spruce
         </button>
 
         <button
           class="classroom-button"
-          data-classroom="Seedlings"
-          onclick="selectClassroom('Seedlings', this)"
+          onclick="setClassroom('Seedlings', this)"
         >
           Seedlings
         </button>
 
       </div>
-
-    </section>
-
-
-    <section id="opportunitiesSection">
-
-      <h2 class="section-title" id="opportunitiesTitle">
-        Available Sign-Ups
-      </h2>
-
-      <div id="loading">
-        Loading available dates...
-      </div>
-
-      <div id="slotsContainer"></div>
-
-    </section>
-
-  </main>
+    </div>
 
 
-  <!-- SIGN-UP POPUP -->
-
-  <div
-    class="modal-overlay"
-    id="modalOverlay"
-    onclick="overlayClick(event)"
-  >
-
-    <div class="modal">
+    <div class="month-navigation">
 
       <button
-        class="close-button"
-        onclick="closeModal()"
-        aria-label="Close"
+        onclick="changeMonth(-1)"
+        aria-label="Previous month"
       >
-        ×
+        ‹
       </button>
 
-
-      <div id="formContent">
-
-        <h2>Sign Up</h2>
-
-        <div class="selection-summary">
-
-          <p
-            class="selected-date"
-            id="modalDate"
-          ></p>
-
-          <p id="modalClassroom"></p>
-          <p id="modalType"></p>
-
-          <p style="margin-top:10px;">
-            <strong>Please bring:</strong>
-          </p>
-
-          <p
-            id="modalItems"
-            style="white-space:pre-line;"
-          ></p>
-
-        </div>
-
-
-        <form
-          id="signupForm"
-          onsubmit="submitSignup(event)"
-        >
-
-          <label for="childName">
-            Child's Name
-          </label>
-
-          <input
-            type="text"
-            id="childName"
-            autocomplete="name"
-            required
-          >
-
-
-          <label for="caregiverEmail">
-            Caregiver Email
-          </label>
-
-          <input
-            type="email"
-            id="caregiverEmail"
-            autocomplete="email"
-            required
-          >
-
-
-          <button
-            type="submit"
-            class="submit-button"
-            id="submitButton"
-          >
-            Sign Me Up
-          </button>
-
-
-          <div
-            class="form-error"
-            id="formError"
-          ></div>
-
-        </form>
-
-      </div>
-
-
       <div
-        class="success-content"
-        id="successContent"
+        class="month-title"
+        id="monthTitle"
+      ></div>
+
+      <button
+        onclick="changeMonth(1)"
+        aria-label="Next month"
       >
-
-        <div class="success-icon">♥</div>
-
-        <h2>You're signed up!</h2>
-
-        <p id="successText">
-          Thank you for helping support your child's classroom.
-        </p>
-
-        <p>
-          We'll send a reminder to the email you provided
-          two days before your sign-up date.
-        </p>
-
-        <button
-          class="submit-button"
-          onclick="finishSignup()"
-        >
-          Done
-        </button>
-
-      </div>
+        ›
+      </button>
 
     </div>
 
   </div>
 
 
-  <footer>
-    Pine Grove Montessori School
-  </footer>
+  <div class="legend">
+
+    <div class="legend-item">
+      <span class="legend-dot snack"></span>
+      Snack
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-dot food"></span>
+      Food Prep
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-dot flowers"></span>
+      Flower Arranging
+    </div>
+
+  </div>
+
+
+  <div id="calendarContainer">
+
+    <div class="loading">
+      Loading snack calendar...
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- SIGN-UP MODAL -->
+
+<div
+  class="modal-overlay"
+  id="modalOverlay"
+  onclick="overlayClick(event)"
+>
+
+  <div class="modal">
+
+    <button
+      class="close-button"
+      onclick="closeModal()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div id="formContent">
+
+      <h2>Sign Up</h2>
+
+      <div class="selection-summary">
+
+        <p
+          class="selected-date"
+          id="modalDate"
+        ></p>
+
+        <p id="modalClassroom"></p>
+
+        <p>
+          <strong id="modalType"></strong>
+        </p>
+
+        <p style="margin-top:10px;">
+          <strong>Please bring:</strong>
+        </p>
+
+        <p
+          id="modalItems"
+          style="white-space:pre-line;"
+        ></p>
+
+      </div>
+
+
+      <form
+        onsubmit="submitSignup(event)"
+      >
+
+        <label for="childName">
+          Child's Name
+        </label>
+
+        <input
+          id="childName"
+          type="text"
+          required
+        >
+
+
+        <label for="caregiverEmail">
+          Caregiver Email
+        </label>
+
+        <input
+          id="caregiverEmail"
+          type="email"
+          required
+        >
+
+
+        <button
+          id="submitButton"
+          class="submit-button"
+          type="submit"
+        >
+          Sign Me Up
+        </button>
+
+
+        <div
+          id="formError"
+          class="form-error"
+        ></div>
+
+      </form>
+
+    </div>
+
+
+    <div
+      id="successContent"
+      class="success-content"
+    >
+
+      <div class="success-heart">♥</div>
+
+      <h2>You're signed up!</h2>
+
+      <p id="successText"></p>
+
+      <p>
+        Check your email for your confirmation.
+        We'll also send you a reminder on the
+        Friday before your sign-up date.
+      </p>
+
+      <button
+        class="submit-button"
+        onclick="finishSignup()"
+      >
+        Done
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  Pine Grove Montessori School
+</footer>
 
 
 <script>
 
-  /*
-   * Pine Grove Apps Script Web App
-   */
-
-  const WEB_APP_URL =
-    'https://script.google.com/macros/s/AKfycbyU2YWxl25UnMHHZ0VN3_nd-Yip8ztHBxuN-RAfLKhSuHd5tEzkNhW9BJ4YXATIOA7e/exec';
+const WEB_APP_URL =
+  'https://script.google.com/macros/s/AKfycbyU2YWxl25UnMHHZ0VN3_nd-Yip8ztHBxuN-RAfLKhSuHd5tEzkNhW9BJ4YXATIOA7e/exec';
 
 
-  let allSlots = [];
-  let selectedClassroom = '';
-  let selectedSlot = null;
+let allSlots = [];
+let selectedClassroom = 'All';
+let selectedSlot = null;
+
+let currentMonth = new Date();
+currentMonth.setDate(1);
 
 
-  /* -----------------------------------
-     LOAD AVAILABLE SLOTS
-  ----------------------------------- */
 
-  async function loadSlots() {
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
-    const loading =
-      document.getElementById('loading');
+async function loadSlots() {
 
-    const container =
-      document.getElementById('slotsContainer');
+  try {
 
-    loading.style.display = 'block';
-    container.innerHTML = '';
+    const response =
+      await fetch(WEB_APP_URL);
 
-    try {
+    const data =
+      await response.json();
 
-      const response =
-        await fetch(WEB_APP_URL);
-
-      if (!response.ok) {
-        throw new Error(
-          'Could not connect to the sign-up sheet.'
-        );
-      }
-
-      const data =
-        await response.json();
-
-      if (!data.success) {
-        throw new Error(
-          data.message ||
-          'Unable to load sign-ups.'
-        );
-      }
-
-      allSlots =
-        Array.isArray(data.slots)
-          ? data.slots
-          : [];
-
-      loading.style.display = 'none';
-
-      if (selectedClassroom) {
-        renderSlots();
-      } else {
-        container.innerHTML =
-          `<div class="message-box">
-            Choose a classroom above to see available dates.
-          </div>`;
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-      loading.style.display = 'none';
-
-      container.innerHTML =
-        `<div class="message-box">
-          We're having trouble loading the sign-up calendar.
-          Please refresh the page and try again.
-        </div>`;
+    if (!data.success) {
+      throw new Error(
+        data.message ||
+        'Unable to load calendar.'
+      );
     }
-  }
+
+    allSlots =
+      Array.isArray(data.slots)
+        ? data.slots
+        : [];
 
 
-  /* -----------------------------------
-     CLASSROOM FILTER
-  ----------------------------------- */
+    /*
+     * Automatically start on the earliest month
+     * that has a current/future opportunity.
+     */
 
-  function selectClassroom(
-    classroom,
-    button
-  ) {
+    const today =
+      new Date();
 
-    selectedClassroom = classroom;
-
-    document
-      .querySelectorAll('.classroom-button')
-      .forEach(btn =>
-        btn.classList.remove('active')
-      );
-
-    button.classList.add('active');
-
-    document.getElementById(
-      'opportunitiesTitle'
-    ).textContent =
-      `${classroom} Classroom Sign-Ups`;
-
-    renderSlots();
-
-    document.getElementById(
-      'opportunitiesSection'
-    ).scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
+    today.setHours(0,0,0,0);
 
 
-  /* -----------------------------------
-     SHOW AVAILABLE SLOTS
-  ----------------------------------- */
-
-  function renderSlots() {
-
-    const container =
-      document.getElementById(
-        'slotsContainer'
-      );
-
-    const filtered =
+    const upcoming =
       allSlots
-        .filter(slot =>
-          normalizeClassroom(
-            slot.classroom
-          ) === selectedClassroom
+        .map(slot => ({
+          slot: slot,
+          date: parseDate(slot.date)
+        }))
+        .filter(item =>
+          item.date >= today
         )
-        .sort((a, b) =>
-          a.date.localeCompare(b.date)
-        );
-
-    if (filtered.length === 0) {
-
-      container.innerHTML =
-        `<div class="message-box">
-          There aren't currently any available
-          sign-ups for the ${escapeHtml(selectedClassroom)}
-          Classroom.
-        </div>`;
-
-      return;
-    }
-
-
-    const grouped = {};
-
-    filtered.forEach(slot => {
-
-      const monthKey =
-        getMonthKey(slot.date);
-
-      if (!grouped[monthKey]) {
-        grouped[monthKey] = [];
-      }
-
-      grouped[monthKey].push(slot);
-    });
-
-
-    container.innerHTML =
-      Object.keys(grouped)
-        .map(monthKey => {
-
-          const slots =
-            grouped[monthKey];
-
-          const monthName =
-            getMonthHeading(
-              slots[0].date
-            );
-
-          return `
-            <div class="month-section">
-
-              <h3 class="month-heading">
-                ${escapeHtml(monthName)}
-              </h3>
-
-              <div class="slots-grid">
-
-                ${slots
-                  .map(slot =>
-                    slotCardHtml(slot)
-                  )
-                  .join('')}
-
-              </div>
-
-            </div>
-          `;
-        })
-        .join('');
-  }
-
-
-  function slotCardHtml(slot) {
-
-    const slotIndex =
-      allSlots.indexOf(slot);
-
-    return `
-      <article class="slot-card">
-
-        <div class="slot-top">
-
-          <div class="slot-date">
-            ${escapeHtml(slot.displayDate)}
-          </div>
-
-          <div class="type-badge">
-            ${escapeHtml(slot.type)}
-          </div>
-
-        </div>
-
-        <div class="items-label">
-          Please Bring
-        </div>
-
-        <div class="items-needed">
-          ${escapeHtml(slot.itemsNeeded)}
-        </div>
-
-        <button
-          class="signup-button"
-          onclick="openSignup(${slotIndex})"
-        >
-          Sign Up
-        </button>
-
-      </article>
-    `;
-  }
-
-
-  /* -----------------------------------
-     SIGN-UP POPUP
-  ----------------------------------- */
-
-  function openSignup(index) {
-
-    selectedSlot =
-      allSlots[index];
-
-    document.getElementById(
-      'modalDate'
-    ).textContent =
-      selectedSlot.displayDate;
-
-
-    document.getElementById(
-      'modalClassroom'
-    ).textContent =
-      `${normalizeClassroom(
-        selectedSlot.classroom
-      )} Classroom`;
-
-
-    document.getElementById(
-      'modalType'
-    ).textContent =
-      selectedSlot.type;
-
-
-    document.getElementById(
-      'modalItems'
-    ).textContent =
-      selectedSlot.itemsNeeded;
-
-
-    document.getElementById(
-      'childName'
-    ).value = '';
-
-
-    document.getElementById(
-      'caregiverEmail'
-    ).value = '';
-
-
-    document.getElementById(
-      'formError'
-    ).style.display =
-      'none';
-
-
-    document.getElementById(
-      'formContent'
-    ).style.display =
-      'block';
-
-
-    document.getElementById(
-      'successContent'
-    ).style.display =
-      'none';
-
-
-    document.getElementById(
-      'modalOverlay'
-    ).classList.add('show');
-  }
-
-
-  function closeModal() {
-
-    document.getElementById(
-      'modalOverlay'
-    ).classList.remove('show');
-
-    selectedSlot = null;
-  }
-
-
-  function overlayClick(event) {
-
-    if (
-      event.target.id ===
-      'modalOverlay'
-    ) {
-      closeModal();
-    }
-  }
-
-
-  /* -----------------------------------
-     SUBMIT SIGN-UP
-  ----------------------------------- */
-
-  async function submitSignup(event) {
-
-    event.preventDefault();
-
-    if (!selectedSlot) {
-      return;
-    }
-
-
-    const childName =
-      document.getElementById(
-        'childName'
-      ).value.trim();
-
-
-    const email =
-      document.getElementById(
-        'caregiverEmail'
-      ).value.trim();
-
-
-    const button =
-      document.getElementById(
-        'submitButton'
-      );
-
-
-    const errorBox =
-      document.getElementById(
-        'formError'
-      );
-
-
-    errorBox.style.display =
-      'none';
-
-
-    button.disabled = true;
-
-    button.textContent =
-      'Saving...';
-
-
-    const payload = {
-      action: 'claim',
-      date: selectedSlot.date,
-      classroom:
-        selectedSlot.classroom,
-      type:
-        selectedSlot.type,
-      childName: childName,
-      email: email
-    };
-
-
-    try {
-
-      /*
-       * text/plain prevents the browser from
-       * sending an unnecessary CORS preflight
-       * request to Google Apps Script.
-       */
-
-      const response =
-        await fetch(
-          WEB_APP_URL,
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'text/plain;charset=utf-8'
-            },
-
-            body:
-              JSON.stringify(payload)
-          }
+        .sort((a,b) =>
+          a.date - b.date
         );
 
 
-      const result =
-        await response.json();
+    if (upcoming.length > 0) {
 
-
-      if (!result.success) {
-
-        throw new Error(
-          result.message ||
-          'We could not save your sign-up.'
+      currentMonth =
+        new Date(
+          upcoming[0].date.getFullYear(),
+          upcoming[0].date.getMonth(),
+          1
         );
-      }
-
-
-      document.getElementById(
-        'formContent'
-      ).style.display =
-        'none';
-
-
-      document.getElementById(
-        'successContent'
-      ).style.display =
-        'block';
-
-
-      document.getElementById(
-        'successText'
-      ).textContent =
-        `Thank you! ${childName} is signed up for ${selectedSlot.type} on ${selectedSlot.displayDate}.`;
-
-
-      await loadSlots();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      errorBox.textContent =
-        error.message ||
-        'Something went wrong. Please try again.';
-
-      errorBox.style.display =
-        'block';
-
-    } finally {
-
-      button.disabled = false;
-
-      button.textContent =
-        'Sign Me Up';
     }
+
+
+    renderCalendar();
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.getElementById(
+      'calendarContainer'
+    ).innerHTML =
+      `<div class="error-message">
+        We're having trouble loading the snack calendar.
+        Please refresh the page and try again.
+      </div>`;
   }
+}
 
 
-  function finishSignup() {
-    closeModal();
-  }
+
+/* =========================================================
+   CLASSROOM FILTER
+========================================================= */
+
+function setClassroom(
+  classroom,
+  button
+) {
+
+  selectedClassroom =
+    classroom;
 
 
-  /* -----------------------------------
-     HELPERS
-  ----------------------------------- */
-
-  function normalizeClassroom(value) {
-
-    return String(value || '')
-      .replace(/\s*Classroom\s*$/i, '')
-      .trim();
-  }
-
-
-  function getMonthKey(dateString) {
-
-    const parts =
-      dateString.split('-');
-
-    return `${parts[0]}-${parts[1]}`;
-  }
+  document
+    .querySelectorAll(
+      '.classroom-button'
+    )
+    .forEach(btn =>
+      btn.classList.remove(
+        'active'
+      )
+    );
 
 
-  function getMonthHeading(dateString) {
+  button.classList.add(
+    'active'
+  );
 
-    const parts =
-      dateString.split('-');
 
-    const year =
-      Number(parts[0]);
+  renderCalendar();
+}
 
-    const month =
-      Number(parts[1]);
 
-    const date =
-      new Date(
-        year,
-        month - 1,
-        1
-      );
 
-    return date.toLocaleDateString(
+/* =========================================================
+   MONTH CONTROLS
+========================================================= */
+
+function changeMonth(amount) {
+
+  currentMonth =
+    new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + amount,
+      1
+    );
+
+  renderCalendar();
+}
+
+
+
+/* =========================================================
+   BUILD CALENDAR
+========================================================= */
+
+function renderCalendar() {
+
+  const year =
+    currentMonth.getFullYear();
+
+  const month =
+    currentMonth.getMonth();
+
+
+  document.getElementById(
+    'monthTitle'
+  ).textContent =
+    currentMonth.toLocaleDateString(
       'en-US',
       {
         month: 'long',
         year: 'numeric'
       }
     );
+
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+
+  const lastDay =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+
+  const startDate =
+    new Date(firstDay);
+
+  startDate.setDate(
+    firstDay.getDate() -
+    firstDay.getDay()
+  );
+
+
+  const endDate =
+    new Date(lastDay);
+
+  endDate.setDate(
+    lastDay.getDate() +
+    (6 - lastDay.getDay())
+  );
+
+
+  let daysHtml = '';
+
+  const cursor =
+    new Date(startDate);
+
+
+  while (
+    cursor <= endDate
+  ) {
+
+    daysHtml +=
+      buildDayHtml(
+        new Date(cursor),
+        month
+      );
+
+    cursor.setDate(
+      cursor.getDate() + 1
+    );
   }
 
 
-  function escapeHtml(value) {
+  document.getElementById(
+    'calendarContainer'
+  ).innerHTML =
+    `
+      <div class="calendar-wrap">
 
-    return String(value || '')
-      .replace(
-        /[&<>"']/g,
-        character => ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#039;'
-        })[character]
+        <div class="calendar">
+
+          <div class="calendar-weekdays">
+
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+
+          </div>
+
+          <div class="calendar-grid">
+            ${daysHtml}
+          </div>
+
+        </div>
+
+      </div>
+    `;
+}
+
+
+
+/* =========================================================
+   BUILD ONE DAY
+========================================================= */
+
+function buildDayHtml(
+  date,
+  displayedMonth
+) {
+
+  const dateString =
+    formatDateKey(date);
+
+
+  let slots =
+    allSlots.filter(
+      slot =>
+        slot.date ===
+        dateString
+    );
+
+
+  if (
+    selectedClassroom !==
+    'All'
+  ) {
+
+    slots =
+      slots.filter(
+        slot =>
+          normalizeClassroom(
+            slot.classroom
+          ) ===
+          selectedClassroom
       );
   }
 
 
-  /* Load sign-ups when page opens */
+  slots.sort(
+    sortSlots
+  );
 
-  loadSlots();
+
+  const otherMonth =
+    date.getMonth() !==
+    displayedMonth;
+
+
+  return `
+    <div class="
+      calendar-day
+      ${otherMonth ? 'other-month' : ''}
+    ">
+
+      <div class="day-number">
+        ${date.getDate()}
+      </div>
+
+      <div class="day-slots">
+
+        ${slots
+          .map(slot =>
+            slotHtml(slot)
+          )
+          .join('')}
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+/* =========================================================
+   SLOT DISPLAY
+========================================================= */
+
+function slotHtml(slot) {
+
+  const index =
+    allSlots.indexOf(slot);
+
+
+  const typeClass =
+    getTypeClass(
+      slot.type
+    );
+
+
+  const classroom =
+    normalizeClassroom(
+      slot.classroom
+    );
+
+
+  const isTaken =
+    String(slot.status)
+      .toLowerCase() ===
+      'taken';
+
+
+  return `
+    <div class="
+      slot
+      ${typeClass}
+    ">
+
+      <div class="slot-classroom">
+        ${escapeHtml(classroom)}
+      </div>
+
+      <div class="slot-type">
+        ${escapeHtml(slot.type)}
+      </div>
+
+      <div class="slot-items">
+        ${escapeHtml(
+          slot.itemsNeeded
+        )}
+      </div>
+
+      ${
+        isTaken
+          ?
+          `
+            <div class="slot-person">
+              ✓ ${escapeHtml(
+                slot.signedUpBy
+              )}
+            </div>
+          `
+          :
+          `
+            <div class="available-label">
+              Available
+            </div>
+
+            <button
+              onclick="openSignup(${index})"
+            >
+              Sign Up
+            </button>
+          `
+      }
+
+    </div>
+  `;
+}
+
+
+
+/* =========================================================
+   SORT OPPORTUNITIES
+========================================================= */
+
+function sortSlots(a,b) {
+
+  const classroomOrder = {
+    Maple: 1,
+    Birch: 2,
+    Spruce: 3,
+    Seedlings: 4
+  };
+
+
+  const typeOrder = {
+    'Flower Arranging': 1,
+    'Food Prep': 2,
+    'Snack': 3
+  };
+
+
+  const classroomCompare =
+    (
+      classroomOrder[
+        normalizeClassroom(
+          a.classroom
+        )
+      ] || 99
+    )
+    -
+    (
+      classroomOrder[
+        normalizeClassroom(
+          b.classroom
+        )
+      ] || 99
+    );
+
+
+  if (
+    classroomCompare !== 0
+  ) {
+    return classroomCompare;
+  }
+
+
+  return (
+    typeOrder[a.type] || 99
+  )
+  -
+  (
+    typeOrder[b.type] || 99
+  );
+}
+
+
+
+/* =========================================================
+   OPEN SIGN-UP MODAL
+========================================================= */
+
+function openSignup(index) {
+
+  selectedSlot =
+    allSlots[index];
+
+
+  document.getElementById(
+    'modalDate'
+  ).textContent =
+    selectedSlot.displayDate;
+
+
+  document.getElementById(
+    'modalClassroom'
+  ).textContent =
+    `${normalizeClassroom(
+      selectedSlot.classroom
+    )} Classroom`;
+
+
+  document.getElementById(
+    'modalType'
+  ).textContent =
+    selectedSlot.type;
+
+
+  document.getElementById(
+    'modalItems'
+  ).textContent =
+    selectedSlot.itemsNeeded;
+
+
+  document.getElementById(
+    'childName'
+  ).value = '';
+
+
+  document.getElementById(
+    'caregiverEmail'
+  ).value = '';
+
+
+  document.getElementById(
+    'formError'
+  ).style.display =
+    'none';
+
+
+  document.getElementById(
+    'formContent'
+  ).style.display =
+    'block';
+
+
+  document.getElementById(
+    'successContent'
+  ).style.display =
+    'none';
+
+
+  document.getElementById(
+    'modalOverlay'
+  ).classList.add(
+    'show'
+  );
+}
+
+
+
+function closeModal() {
+
+  document.getElementById(
+    'modalOverlay'
+  ).classList.remove(
+    'show'
+  );
+
+  selectedSlot = null;
+}
+
+
+
+function overlayClick(event) {
+
+  if (
+    event.target.id ===
+    'modalOverlay'
+  ) {
+    closeModal();
+  }
+}
+
+
+
+/* =========================================================
+   SUBMIT SIGN-UP
+========================================================= */
+
+async function submitSignup(
+  event
+) {
+
+  event.preventDefault();
+
+
+  if (!selectedSlot) {
+    return;
+  }
+
+
+  const childName =
+    document.getElementById(
+      'childName'
+    ).value.trim();
+
+
+  const email =
+    document.getElementById(
+      'caregiverEmail'
+    ).value.trim();
+
+
+  const button =
+    document.getElementById(
+      'submitButton'
+    );
+
+
+  const errorBox =
+    document.getElementById(
+      'formError'
+    );
+
+
+  errorBox.style.display =
+    'none';
+
+
+  button.disabled = true;
+
+  button.textContent =
+    'Saving...';
+
+
+  const payload = {
+    action: 'claim',
+    date:
+      selectedSlot.date,
+    classroom:
+      selectedSlot.classroom,
+    type:
+      selectedSlot.type,
+    childName:
+      childName,
+    email:
+      email
+  };
+
+
+  try {
+
+    const response =
+      await fetch(
+        WEB_APP_URL,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
+      throw new Error(
+        result.message ||
+        'We could not save your sign-up.'
+      );
+    }
+
+
+    document.getElementById(
+      'formContent'
+    ).style.display =
+      'none';
+
+
+    document.getElementById(
+      'successContent'
+    ).style.display =
+      'block';
+
+
+    document.getElementById(
+      'successText'
+    ).textContent =
+      `${childName} is signed up for ${selectedSlot.type} on ${selectedSlot.displayDate}.`;
+
+
+    await loadSlots();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    errorBox.textContent =
+      error.message ||
+      'Something went wrong. Please try again.';
+
+    errorBox.style.display =
+      'block';
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      'Sign Me Up';
+  }
+}
+
+
+
+function finishSignup() {
+  closeModal();
+}
+
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function normalizeClassroom(
+  value
+) {
+
+  return String(value || '')
+    .replace(
+      /\s*Classroom\s*$/i,
+      ''
+    )
+    .trim();
+}
+
+
+
+function getTypeClass(type) {
+
+  return String(type || '')
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+}
+
+
+
+function parseDate(
+  dateString
+) {
+
+  const [
+    year,
+    month,
+    day
+  ] =
+    dateString
+      .split('-')
+      .map(Number);
+
+
+  return new Date(
+    year,
+    month - 1,
+    day
+  );
+}
+
+
+
+function formatDateKey(date) {
+
+  const year =
+    date.getFullYear();
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(2,'0');
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(2,'0');
+
+
+  return `${year}-${month}-${day}`;
+}
+
+
+
+function escapeHtml(value) {
+
+  return String(value || '')
+    .replace(
+      /[&<>"']/g,
+      character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      })[character]
+    );
+}
+
+
+
+loadSlots();
 
 </script>
 
