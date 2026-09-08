@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Pine Grove Community Snack Sign-Up</title>
+  <title>Pine Grove Community Snack Calendar</title>
 
   <style>
     :root {
@@ -39,7 +39,6 @@
       color: var(--text);
       line-height: 1.45;
     }
-
 
     /* =========================
        HEADER
@@ -78,7 +77,6 @@
       opacity: 0.92;
     }
 
-
     /* =========================
        MAIN
     ========================= */
@@ -112,7 +110,6 @@
     .intro-card strong {
       color: var(--dark-green);
     }
-
 
     /* =========================
        FILTERS
@@ -159,7 +156,6 @@
       color: white;
     }
 
-
     /* =========================
        MONTH NAVIGATION
     ========================= */
@@ -192,7 +188,6 @@
       font-weight: bold;
       color: var(--dark-green);
     }
-
 
     /* =========================
        LEGEND
@@ -231,7 +226,6 @@
       background: #d5a8bb;
     }
 
-
     /* =========================
        CALENDAR
     ========================= */
@@ -241,7 +235,7 @@
     }
 
     .calendar {
-      min-width: 980px;
+      min-width: 900px;
       background: white;
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -251,7 +245,7 @@
 
     .calendar-weekdays {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       background: var(--green);
       color: white;
     }
@@ -267,27 +261,23 @@
 
     .calendar-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
 
     .calendar-day {
-      min-height: 170px;
+      min-height: 180px;
       padding: 9px;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: white;
     }
 
-    .calendar-day:nth-child(7n) {
+    .calendar-day:nth-child(5n) {
       border-right: none;
     }
 
     .calendar-day.other-month {
       background: #f7f7f4;
-    }
-
-    .calendar-day.no-school-day {
-      background: #fafafa;
     }
 
     .day-number {
@@ -300,7 +290,6 @@
     .other-month .day-number {
       color: #a8afa9;
     }
-
 
     /* =========================
        OPPORTUNITIES INSIDE DAYS
@@ -356,6 +345,7 @@
       border-top: 1px solid rgba(0,0,0,0.08);
       padding-top: 5px;
       font-weight: bold;
+      color: var(--dark-green);
     }
 
     .available-label {
@@ -380,7 +370,6 @@
       background: var(--dark-green);
     }
 
-
     /* =========================
        MESSAGES
     ========================= */
@@ -394,7 +383,6 @@
       text-align: center;
       color: var(--muted);
     }
-
 
     /* =========================
        MODAL
@@ -513,7 +501,6 @@
       color: var(--green);
     }
 
-
     /* =========================
        FOOTER
     ========================= */
@@ -524,7 +511,6 @@
       padding: 20px 20px 35px;
       font-size: 13px;
     }
-
 
     /* =========================
        MOBILE
@@ -556,7 +542,6 @@
   </style>
 </head>
 
-
 <body>
 
 <header class="site-header">
@@ -576,10 +561,10 @@
   </div>
 </header>
 
-
 <main>
 
   <div class="intro-card">
+
     <div class="intro-heart">♥</div>
 
     <p>
@@ -592,8 +577,8 @@
       A confirmation email is sent immediately, followed by a
       reminder on the Friday before the scheduled date.
     </p>
-  </div>
 
+  </div>
 
   <div class="controls">
 
@@ -639,8 +624,8 @@
         </button>
 
       </div>
-    </div>
 
+    </div>
 
     <div class="month-navigation">
 
@@ -667,7 +652,6 @@
 
   </div>
 
-
   <div class="legend">
 
     <div class="legend-item">
@@ -687,7 +671,6 @@
 
   </div>
 
-
   <div id="calendarContainer">
 
     <div class="loading">
@@ -697,7 +680,6 @@
   </div>
 
 </main>
-
 
 <!-- SIGN-UP MODAL -->
 
@@ -716,7 +698,6 @@
     >
       ×
     </button>
-
 
     <div id="formContent">
 
@@ -746,7 +727,6 @@
 
       </div>
 
-
       <form
         onsubmit="submitSignup(event)"
       >
@@ -761,7 +741,6 @@
           required
         >
 
-
         <label for="caregiverEmail">
           Caregiver Email
         </label>
@@ -772,7 +751,6 @@
           required
         >
 
-
         <button
           id="submitButton"
           class="submit-button"
@@ -780,7 +758,6 @@
         >
           Sign Me Up
         </button>
-
 
         <div
           id="formError"
@@ -790,7 +767,6 @@
       </form>
 
     </div>
-
 
     <div
       id="successContent"
@@ -822,11 +798,9 @@
 
 </div>
 
-
 <footer>
   Pine Grove Montessori School
 </footer>
-
 
 <script>
 
@@ -835,12 +809,14 @@ const WEB_APP_URL =
 
 
 let allSlots = [];
+
 let selectedClassroom = 'All';
+
 let selectedSlot = null;
 
 let currentMonth = new Date();
-currentMonth.setDate(1);
 
+currentMonth.setDate(1);
 
 
 /* =========================================================
@@ -858,10 +834,12 @@ async function loadSlots() {
       await response.json();
 
     if (!data.success) {
+
       throw new Error(
         data.message ||
         'Unable to load calendar.'
       );
+
     }
 
     allSlots =
@@ -869,17 +847,20 @@ async function loadSlots() {
         ? data.slots
         : [];
 
-
     /*
-     * Automatically start on the earliest month
+     * Start on the earliest month
      * that has a current/future opportunity.
      */
 
     const today =
       new Date();
 
-    today.setHours(0,0,0,0);
-
+    today.setHours(
+      0,
+      0,
+      0,
+      0
+    );
 
     const upcoming =
       allSlots
@@ -890,10 +871,9 @@ async function loadSlots() {
         .filter(item =>
           item.date >= today
         )
-        .sort((a,b) =>
+        .sort((a, b) =>
           a.date - b.date
         );
-
 
     if (upcoming.length > 0) {
 
@@ -903,8 +883,8 @@ async function loadSlots() {
           upcoming[0].date.getMonth(),
           1
         );
-    }
 
+    }
 
     renderCalendar();
 
@@ -915,13 +895,16 @@ async function loadSlots() {
     document.getElementById(
       'calendarContainer'
     ).innerHTML =
-      `<div class="error-message">
-        We're having trouble loading the snack calendar.
-        Please refresh the page and try again.
-      </div>`;
-  }
-}
+      `
+        <div class="error-message">
+          We're having trouble loading the snack calendar.
+          Please refresh the page and try again.
+        </div>
+      `;
 
+  }
+
+}
 
 
 /* =========================================================
@@ -936,7 +919,6 @@ function setClassroom(
   selectedClassroom =
     classroom;
 
-
   document
     .querySelectorAll(
       '.classroom-button'
@@ -947,15 +929,13 @@ function setClassroom(
       )
     );
 
-
   button.classList.add(
     'active'
   );
 
-
   renderCalendar();
-}
 
+}
 
 
 /* =========================================================
@@ -972,12 +952,12 @@ function changeMonth(amount) {
     );
 
   renderCalendar();
+
 }
 
 
-
 /* =========================================================
-   BUILD CALENDAR
+   BUILD MONDAY-FRIDAY CALENDAR
 ========================================================= */
 
 function renderCalendar() {
@@ -987,7 +967,6 @@ function renderCalendar() {
 
   const month =
     currentMonth.getMonth();
-
 
   document.getElementById(
     'monthTitle'
@@ -1000,14 +979,12 @@ function renderCalendar() {
       }
     );
 
-
   const firstDay =
     new Date(
       year,
       month,
       1
     );
-
 
   const lastDay =
     new Date(
@@ -1016,46 +993,95 @@ function renderCalendar() {
       0
     );
 
+  /*
+   * Find the Monday that starts
+   * the first displayed school week.
+   */
 
   const startDate =
     new Date(firstDay);
 
+  const firstDayOfWeek =
+    firstDay.getDay();
+
+  const daysBackToMonday =
+    firstDayOfWeek === 0
+      ? 6
+      : firstDayOfWeek - 1;
+
   startDate.setDate(
     firstDay.getDate() -
-    firstDay.getDay()
+    daysBackToMonday
   );
 
+  /*
+   * Find the Friday that ends
+   * the final displayed school week.
+   */
 
   const endDate =
     new Date(lastDay);
 
+  const lastDayOfWeek =
+    lastDay.getDay();
+
+  let daysForwardToFriday;
+
+  if (lastDayOfWeek === 0) {
+
+    daysForwardToFriday = 5;
+
+  } else if (lastDayOfWeek === 6) {
+
+    daysForwardToFriday = 6;
+
+  } else {
+
+    daysForwardToFriday =
+      5 - lastDayOfWeek;
+
+  }
+
   endDate.setDate(
     lastDay.getDate() +
-    (6 - lastDay.getDay())
+    daysForwardToFriday
   );
-
 
   let daysHtml = '';
 
   const cursor =
     new Date(startDate);
 
-
   while (
     cursor <= endDate
   ) {
 
-    daysHtml +=
-      buildDayHtml(
-        new Date(cursor),
-        month
-      );
+    const dayOfWeek =
+      cursor.getDay();
+
+    /*
+     * Only create boxes
+     * Monday through Friday.
+     */
+
+    if (
+      dayOfWeek >= 1 &&
+      dayOfWeek <= 5
+    ) {
+
+      daysHtml +=
+        buildDayHtml(
+          new Date(cursor),
+          month
+        );
+
+    }
 
     cursor.setDate(
       cursor.getDate() + 1
     );
-  }
 
+  }
 
   document.getElementById(
     'calendarContainer'
@@ -1067,13 +1093,11 @@ function renderCalendar() {
 
           <div class="calendar-weekdays">
 
-            <div class="weekday">Sun</div>
             <div class="weekday">Mon</div>
             <div class="weekday">Tue</div>
             <div class="weekday">Wed</div>
             <div class="weekday">Thu</div>
             <div class="weekday">Fri</div>
-            <div class="weekday">Sat</div>
 
           </div>
 
@@ -1085,8 +1109,8 @@ function renderCalendar() {
 
       </div>
     `;
-}
 
+}
 
 
 /* =========================================================
@@ -1101,18 +1125,14 @@ function buildDayHtml(
   const dateString =
     formatDateKey(date);
 
-
   let slots =
     allSlots.filter(
       slot =>
-        slot.date ===
-        dateString
+        slot.date === dateString
     );
 
-
   if (
-    selectedClassroom !==
-    'All'
+    selectedClassroom !== 'All'
   ) {
 
     slots =
@@ -1123,24 +1143,24 @@ function buildDayHtml(
           ) ===
           selectedClassroom
       );
-  }
 
+  }
 
   slots.sort(
     sortSlots
   );
 
-
   const otherMonth =
     date.getMonth() !==
     displayedMonth;
 
-
   return `
-    <div class="
-      calendar-day
-      ${otherMonth ? 'other-month' : ''}
-    ">
+    <div
+      class="
+        calendar-day
+        ${otherMonth ? 'other-month' : ''}
+      "
+    >
 
       <div class="day-number">
         ${date.getDate()}
@@ -1158,12 +1178,12 @@ function buildDayHtml(
 
     </div>
   `;
+
 }
 
 
-
 /* =========================================================
-   SLOT DISPLAY
+   DISPLAY EACH SLOT
 ========================================================= */
 
 function slotHtml(slot) {
@@ -1171,30 +1191,31 @@ function slotHtml(slot) {
   const index =
     allSlots.indexOf(slot);
 
-
   const typeClass =
     getTypeClass(
       slot.type
     );
-
 
   const classroom =
     normalizeClassroom(
       slot.classroom
     );
 
-
   const isTaken =
-    String(slot.status)
+    String(
+      slot.status || ''
+    )
+      .trim()
       .toLowerCase() ===
       'taken';
 
-
   return `
-    <div class="
-      slot
-      ${typeClass}
-    ">
+    <div
+      class="
+        slot
+        ${typeClass}
+      "
+    >
 
       <div class="slot-classroom">
         ${escapeHtml(classroom)}
@@ -1216,7 +1237,8 @@ function slotHtml(slot) {
           `
             <div class="slot-person">
               ✓ ${escapeHtml(
-                slot.signedUpBy
+                slot.signedUpBy ||
+                'Signed Up'
               )}
             </div>
           `
@@ -1236,15 +1258,15 @@ function slotHtml(slot) {
 
     </div>
   `;
-}
 
+}
 
 
 /* =========================================================
    SORT OPPORTUNITIES
 ========================================================= */
 
-function sortSlots(a,b) {
+function sortSlots(a, b) {
 
   const classroomOrder = {
     Maple: 1,
@@ -1253,13 +1275,11 @@ function sortSlots(a,b) {
     Seedlings: 4
   };
 
-
   const typeOrder = {
     'Flower Arranging': 1,
     'Food Prep': 2,
     'Snack': 3
   };
-
 
   const classroomCompare =
     (
@@ -1278,13 +1298,13 @@ function sortSlots(a,b) {
       ] || 99
     );
 
-
   if (
     classroomCompare !== 0
   ) {
-    return classroomCompare;
-  }
 
+    return classroomCompare;
+
+  }
 
   return (
     typeOrder[a.type] || 99
@@ -1293,8 +1313,8 @@ function sortSlots(a,b) {
   (
     typeOrder[b.type] || 99
   );
-}
 
+}
 
 
 /* =========================================================
@@ -1306,12 +1326,10 @@ function openSignup(index) {
   selectedSlot =
     allSlots[index];
 
-
   document.getElementById(
     'modalDate'
   ).textContent =
     selectedSlot.displayDate;
-
 
   document.getElementById(
     'modalClassroom'
@@ -1320,54 +1338,46 @@ function openSignup(index) {
       selectedSlot.classroom
     )} Classroom`;
 
-
   document.getElementById(
     'modalType'
   ).textContent =
     selectedSlot.type;
-
 
   document.getElementById(
     'modalItems'
   ).textContent =
     selectedSlot.itemsNeeded;
 
-
   document.getElementById(
     'childName'
   ).value = '';
 
-
   document.getElementById(
     'caregiverEmail'
   ).value = '';
-
 
   document.getElementById(
     'formError'
   ).style.display =
     'none';
 
-
   document.getElementById(
     'formContent'
   ).style.display =
     'block';
-
 
   document.getElementById(
     'successContent'
   ).style.display =
     'none';
 
-
   document.getElementById(
     'modalOverlay'
   ).classList.add(
     'show'
   );
-}
 
+}
 
 
 function closeModal() {
@@ -1379,8 +1389,8 @@ function closeModal() {
   );
 
   selectedSlot = null;
-}
 
+}
 
 
 function overlayClick(event) {
@@ -1389,61 +1399,53 @@ function overlayClick(event) {
     event.target.id ===
     'modalOverlay'
   ) {
-    closeModal();
-  }
-}
 
+    closeModal();
+
+  }
+
+}
 
 
 /* =========================================================
    SUBMIT SIGN-UP
 ========================================================= */
 
-async function submitSignup(
-  event
-) {
+async function submitSignup(event) {
 
   event.preventDefault();
-
 
   if (!selectedSlot) {
     return;
   }
-
 
   const childName =
     document.getElementById(
       'childName'
     ).value.trim();
 
-
   const email =
     document.getElementById(
       'caregiverEmail'
     ).value.trim();
-
 
   const button =
     document.getElementById(
       'submitButton'
     );
 
-
   const errorBox =
     document.getElementById(
       'formError'
     );
 
-
   errorBox.style.display =
     'none';
-
 
   button.disabled = true;
 
   button.textContent =
     'Saving...';
-
 
   const payload = {
     action: 'claim',
@@ -1458,7 +1460,6 @@ async function submitSignup(
     email:
       email
   };
-
 
   try {
 
@@ -1480,39 +1481,34 @@ async function submitSignup(
         }
       );
 
-
     const result =
       await response.json();
 
-
     if (!result.success) {
+
       throw new Error(
         result.message ||
         'We could not save your sign-up.'
       );
-    }
 
+    }
 
     document.getElementById(
       'formContent'
     ).style.display =
       'none';
 
-
     document.getElementById(
       'successContent'
     ).style.display =
       'block';
-
 
     document.getElementById(
       'successText'
     ).textContent =
       `${childName} is signed up for ${selectedSlot.type} on ${selectedSlot.displayDate}.`;
 
-
     await loadSlots();
-
 
   } catch (error) {
 
@@ -1531,24 +1527,24 @@ async function submitSignup(
 
     button.textContent =
       'Sign Me Up';
-  }
-}
 
+  }
+
+}
 
 
 function finishSignup() {
-  closeModal();
-}
 
+  closeModal();
+
+}
 
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function normalizeClassroom(
-  value
-) {
+function normalizeClassroom(value) {
 
   return String(value || '')
     .replace(
@@ -1556,22 +1552,23 @@ function normalizeClassroom(
       ''
     )
     .trim();
-}
 
+}
 
 
 function getTypeClass(type) {
 
   return String(type || '')
     .toLowerCase()
-    .replace(/\s+/g, '-');
+    .replace(
+      /\s+/g,
+      '-'
+    );
+
 }
 
 
-
-function parseDate(
-  dateString
-) {
+function parseDate(dateString) {
 
   const [
     year,
@@ -1582,14 +1579,13 @@ function parseDate(
       .split('-')
       .map(Number);
 
-
   return new Date(
     year,
     month - 1,
     day
   );
-}
 
+}
 
 
 function formatDateKey(date) {
@@ -1600,17 +1596,24 @@ function formatDateKey(date) {
   const month =
     String(
       date.getMonth() + 1
-    ).padStart(2,'0');
+    )
+      .padStart(
+        2,
+        '0'
+      );
 
   const day =
     String(
       date.getDate()
-    ).padStart(2,'0');
-
+    )
+      .padStart(
+        2,
+        '0'
+      );
 
   return `${year}-${month}-${day}`;
-}
 
+}
 
 
 function escapeHtml(value) {
@@ -1626,9 +1629,13 @@ function escapeHtml(value) {
         "'": '&#039;'
       })[character]
     );
+
 }
 
 
+/* =========================================================
+   START
+========================================================= */
 
 loadSlots();
 
